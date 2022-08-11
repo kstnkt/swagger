@@ -131,8 +131,8 @@ paths:
                 type: "string"
                 example: "00:00:00"
               離接者情報:
-                type: "string"
-                example: null
+                type: "integer"
+                example: 5
         "401":
           description: "認証不可"
       security:
