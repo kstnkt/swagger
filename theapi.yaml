@@ -1,44 +1,67 @@
 swagger: "2.0"
 
 info:
-  description: "(TEST) This is a sample server Petstore server.  You can find out more about     Swagger at [http://swagger.io](http://swagger.io) or on [irc.freenode.net, #swagger](http://swagger.io/irc/).      For this sample, you can use the api key `special-key` to test the authorization     filters."
+  description: "本ドキュメントでは一般社団法人ソーシャルアクション機構が運営するサービス「福祉Mover」の API サーバの API 仕様を記述する。"
   version: "1.0.0"
-  title: "Social Action Organization API Documents"
-  termsOfService: "http://swagger.io/terms/"
+  title: "ソーシャルアクション機構 福祉Mover API Documents"
+  termsOfService: "https://socialaction.net/mover/user-3/"
   contact:
-    email: "apiteam@swagger.io"
+    url: "https://socialaction.net/mover/user-3/"
   license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    name: "一般社団法人ソーシャルアクション機構に帰属"
+#    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 
-host: "petstore.swagger.io"
+host: "(not public)"
 
-basePath: "/v2"
+basePath: "/"
 
 tags:
-  - name: "pet"
-    description: "Everything about your Pets"
-    externalDocs:
-      description: "Find out more"
-      url: "http://swagger.io"
-  - name: "store"
-    description: "Access to Petstore orders"
-  - name: "user"
-    description: "Operations about user"
-    externalDocs:
-      description: "Find out more about our store"
-      url: "http://swagger.io"
+  - name: "bindata-api"
+    description: "bindata-api API"
+  - name: "nowpos-api"
+    description: "nowpos-api API"
+  - name:  "possavs-api"
+    description: "possavs/data"
 schemes:
-  - "https"
   - "http"
 paths:
-  /pet:
-    post:
+  /nowpos/data:
+    get:
+      tags:
+        - "nowpos-api"
+      summary: "全データを取得する。"
+      description: "全データを取得する。"
+      responses:
+        "401":
+          description: "Unauthorized"
+      security:
+        - BasicAuth: []
+        - BearerAuth: ['bearer']
+  /nowpos/data/{id}:
+    get:
+      tags:
+        - "nowpos-api"
+      summary: "指定した id の情報を取得する。"
+      description: "全データを取得する。"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "データの ID"
+          required: true
+          schema:
+            type: integer
+      responses:
+        "401":
+          description: "Unauthorized"
+      security:
+        - BasicAuth: []
+        - BearerAuth: ['bearer']
+    put:
       tags:
         - "pet"
-      summary: "Add a new pet to the store"
+      summary: "Update an existing pet"
       description: ""
-      operationId: "addPet"
+      operationId: "updatePet"
       consumes:
         - "application/json"
         - "application/xml"
@@ -53,8 +76,12 @@ paths:
           schema:
             $ref: "#/definitions/Pet"
       responses:
+        "400":
+          description: "Invalid ID supplied"
+        "404":
+          description: "Pet not found"
         "405":
-          description: "Invalid input"
+          description: "Validation exception"
       security:
         - petstore_auth:
           - "write:pets"
