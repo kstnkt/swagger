@@ -9,7 +9,7 @@ info:
     url: "https://socialaction.net/mover/user-3/"
   license:
     name: "一般社団法人ソーシャルアクション機構に帰属"
-#    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+    url: "https://socialaction.net"
 
 host: "(not public)"
 
@@ -48,9 +48,20 @@ paths:
           name: "id"
           description: "データの ID"
           required: true
-          schema:
-            type: integer
+          type: integer
       responses:
+        "200":
+          description: "JSON 形式のデータ"
+          schema:
+            type: "object"
+            properties:
+              - cnt:
+                type: "integer"
+              - cars:
+                type: "object"
+                properties:
+                  - petId:
+                    type: "integer"
         "401":
           description: "Unauthorized"
       security:
