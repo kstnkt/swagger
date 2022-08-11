@@ -40,6 +40,104 @@ paths:
           description: "認証不可"
       security:
         - tokenAuth: []
+    post:
+      tags:
+        - "nowpos-api"
+      summary: "データを更新する。"
+      description: "データを更新する。"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
+          required: true
+          schema:
+            type: "object"
+            properties:
+              日付:
+                type: "string"
+                example: "2022-08-11"
+              id:
+                type: "string"
+                example: "65"
+              時間:
+                type: "string"
+                example: "18:10:10"
+              運転手: 
+                type: "string"
+                example: "坂本"
+              Posx: 
+                type: "string"
+                example: "36.39245"
+              Posy: 
+                type: "string"
+                example: "139.0442138"
+              binkubun: 
+                type: "string"
+                example: "1"
+              deptime: 
+                type: "string"
+                example: "05:00:00"
+              imei: 
+                type: "string"
+                example: "9594f124e3bbef40 4"
+              battery: 
+                type: "string"
+                example: "4"
+              出発時間: 
+                type: "string"
+                example: "05:00:00"
+              事業所CD: 
+                type: "string"
+                example: "0001"
+      responses:
+        "200":
+          description: "更新した結果"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "string"
+                example: "65"
+              事業所CD:
+                type: "string"
+                example: "0001"
+              rest:
+                type: "string"
+                example: null
+              人数:
+                type: "integer"
+                example: 0
+              残人数:
+                type: "integer"
+                example: null
+              userStatus:
+                type: "string"
+                example: null
+              demandId: 
+                type: "string"
+                example: null
+              driver: 
+                type: "string"
+                example: null
+              demand人数: 
+                type: "integer"
+                example: null
+              demand残人数:
+                type: "integer"
+                example: null
+              出発時間: 
+                type: "string"
+                example: "00:00:00"
+              離接者情報:
+                type: "string"
+                example: null
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+    
   /nowpos/data/{id}:
     get:
       tags:
