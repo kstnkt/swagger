@@ -24,3 +24,16 @@ source venv/bin/activate
 flask run
 ```
 Swagger の Authorize を以下のように設定する
+
+![image](https://user-images.githubusercontent.com/56060104/184055536-500b6faf-ae05-4a55-8d3e-bc5187da000d.png)
+
+![image](https://user-images.githubusercontent.com/56060104/184055634-d96ade53-187b-495a-8778-6717838b106d.png)
+
+### Swagger 上から API を実行
+
+![image](https://user-images.githubusercontent.com/56060104/184055726-ca28b27c-7509-4439-843f-bd39adef4e52.png)
+
+![image](https://user-images.githubusercontent.com/56060104/184055770-0c90188f-5ece-42c0-9d52-78a47684ec75.png)
+
+![image](https://user-images.githubusercontent.com/56060104/184055830-b372f3b3-b585-4d03-a4f9-e2a3febd16b5.png)
+
