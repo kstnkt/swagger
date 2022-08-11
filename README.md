@@ -1,4 +1,6 @@
-# 本ドキュメントの更新方法
+# swagger の使い方
+
+## 本ドキュメントの更新方法
 
 1. theapi.yaml を修正しコミット
 1. 基本的にコミットされると以降の処理は自動で実行されるが、必要な場合は以降を実行する
@@ -10,3 +12,15 @@
 ![image](https://user-images.githubusercontent.com/56060104/183226574-eb130f82-3a25-49f3-9557-33a89d147eb0.png)
 
 上記で、所定の URL から swagger のドキュメントを参照できるようになる。
+
+## API を swagger から確認する
+
+### 事前準備
+
+API サーバをトークン認証にしてローカルで以下のようにして実行しておく。
+```
+cd api
+source venv/bin/activate
+flask run
+```
+Swagger の Authorize を以下のように設定する
