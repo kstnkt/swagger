@@ -1,6 +1,7 @@
 # 本ドキュメントの更新方法
 
 1. theapi.yaml を修正しコミット
+1. 基本的にコミットされると以降の処理は自動で実行されるが、必要な場合は以降を実行する
 1. 本リポジトリの上部 **Actions** をクリック
 ![image](https://user-images.githubusercontent.com/56060104/183226452-19b72aa5-9b27-4f73-ad36-75df238cb7d8.png)
 1. 過去に成功している **Pages build and deployment** をクリック
