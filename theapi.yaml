@@ -25,7 +25,51 @@ tags:
 schemes:
   - "http"
 paths:
-  /nowpos/data:
+  /nowpos/data/{id}:
+    get:
+      tags:
+        - "nowpos-api"
+      summary: "指定データを取得する。"
+      description: "指定データを取得する。"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id"
+          type: "integer"
+          required: true
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            $ref : "#/definitions/NowPosGetResponse"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+    delete:
+      tags:
+        - "nowpos-api"
+      summary: "データを削除する。"
+      description: "データを削除する。"
+      consumes:
+        - "application/json"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id"
+          type: "integer"
+          required: true
+      responses:
+        "200":
+          description: "削除成功"
+        "204":
+          description: "存在しない id、またはパラメータが渡されていない"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+
+  /nowpos/data/:
     get:
       tags:
         - "nowpos-api"
@@ -33,9 +77,11 @@ paths:
       description: "全データを取得する。"
       responses:
         "200":
-          description: "全データ"
+          description: "データ"
           schema:
-            type: "object"
+            type: "array"
+            items:
+              $ref: "#/definitions/NowPosGetResponse"
         "401":
           description: "認証不可"
       security:
@@ -43,8 +89,8 @@ paths:
     post:
       tags:
         - "nowpos-api"
-      summary: "データを更新する。"
-      description: "データを更新する。"
+      summary: "データを更新・挿入する。"
+      description: "データを更新・挿入する。"
       consumes:
         - "application/json"
       parameters:
@@ -53,44 +99,7 @@ paths:
           description: "JSON 形式の body"
           required: true
           schema:
-            type: "object"
-            properties:
-              日付:
-                type: "string"
-                example: "2022-08-11"
-              id:
-                type: "string"
-                example: "65"
-              時間:
-                type: "string"
-                example: "18:10:10"
-              運転手: 
-                type: "string"
-                example: "坂本"
-              Posx: 
-                type: "string"
-                example: "36.39245"
-              Posy: 
-                type: "string"
-                example: "139.0442138"
-              binkubun: 
-                type: "string"
-                example: "1"
-              deptime: 
-                type: "string"
-                example: "05:00:00"
-              imei: 
-                type: "string"
-                example: "9594f124e3bbef40 4"
-              battery: 
-                type: "string"
-                example: "4"
-              出発時間: 
-                type: "string"
-                example: "05:00:00"
-              事業所CD: 
-                type: "string"
-                example: "0001"
+            $ref : "#/definitions/NowPosParameter"
       responses:
         "200":
           description: "更新した結果"
@@ -135,29 +144,33 @@ paths:
                 example: 5
         "401":
           description: "認証不可"
-      security:
-        - tokenAuth: []
-    
-  /nowpos/data/{id}:
-    get:
+        "404":
+          description: "存在しない id"
+    put:
       tags:
         - "nowpos-api"
-      summary: "指定した id の情報を取得する。"
-      description: "全データを取得する。"
+      summary: "データを更新する。"
+      description: "データを更新する。"
+      consumes:
+        - "application/json"
       parameters:
-        - in: "path"
-          name: "id"
-          description: "データの ID"
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
           required: true
-          type: integer
+          schema:
+            $ref: "#/definitions/NowPosParameter"
       responses:
         "200":
-          description: "全データ"
+          description: "更新した結果"
+          schema:
+            $ref: "#/definitions/NowPosParameter"
+        "204":
+          description: "存在しない id、またはパラメータが渡されていない"
         "401":
           description: "認証不可"
       security:
-        - basicAuth: []
-
+        - tokenAuth: []
 
 securityDefinitions:
   basicAuth:
@@ -166,6 +179,82 @@ securityDefinitions:
     name: "Authorization"
     type: "apiKey"
     in: "header"
+
+definitions:
+  NowPosGetResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "151"
+      事業所CD:
+        type: "string"
+        example: "0101"
+      運転手:
+        type: "string"
+        example: "宮崎"
+      日付:
+        type: "string"
+        example: "2022/08/04"
+      時間:
+        type: "string"
+        example: "09:52:56"
+      Posx:
+        type: "string"
+        example: "36.432614"
+      Posy:
+        type: "string"
+        example: "139.062936"
+      rest:
+        type: "string"
+        example: "f"
+      battery:
+        type: "string"
+        example: "79"
+      status:
+        type: "string"
+        example: "DECLINED"
+
+  NowPosParameter:
+    type: "object"
+    properties:
+      日付:
+        type: "string"
+        example: "2022-08-11"
+      id:
+        type: "string"
+        example: "65"
+      時間:
+        type: "string"
+        example: "18:10:10"
+      運転手: 
+        type: "string"
+        example: "坂本"
+      Posx: 
+        type: "string"
+        example: "36.39245"
+      Posy: 
+        type: "string"
+        example: "139.0442138"
+      binkubun: 
+        type: "string"
+        example: "1"
+      deptime: 
+        type: "string"
+        example: "05:00:00"
+      imei: 
+        type: "string"
+        example: "9594f124e3bbef40 4"
+      battery: 
+        type: "string"
+        example: "4"
+      出発時間: 
+        type: "string"
+        example: "05:00:00"
+      事業所CD: 
+        type: "string"
+        example: "0001"
+
 
 externalDocs:
   description: "Find out more about Swagger"
