@@ -31,6 +31,8 @@ paths:
         - "nowpos-api"
       summary: "指定データを取得する。"
       description: "指定データを取得する。"
+      produces:
+        - "*/*"
       parameters:
         - in: "path"
           name: "id"
@@ -51,8 +53,8 @@ paths:
         - "nowpos-api"
       summary: "データを削除する。"
       description: "データを削除する。"
-      consumes:
-        - "application/json"
+      produces:
+        - "*/*"
       parameters:
         - in: "path"
           name: "id"
@@ -69,29 +71,50 @@ paths:
       security:
         - tokenAuth: []
 
-  /nowpos/data/:
+  /nowpos/data/?id={id}&事業所CD={事業所CD}:
     get:
       tags:
         - "nowpos-api"
-      summary: "全データを取得する。"
-      description: "全データを取得する。"
+      summary: "全データ、あるいは指定の範囲のデータを取得する。"
+      description: "全データ、あるいは指定の範囲のデータを取得する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "id"
+          type: "integer"
+          required: false
+        - in: "path"
+          name: "事業所CD"
+          description: "事業所CD"
+          type: "integer"
+          required: false
       responses:
         "200":
           description: "データ"
           schema:
-            type: "array"
-            items:
-              $ref: "#/definitions/NowPosGetResponse"
+            type: "object"
+            properties:
+              cnt:
+                type: integer
+                description: "件数"
+              cars:
+                type: "array"
+                items:
+                  $ref: "#/definitions/NowPosGetResponse2"
         "401":
           description: "認証不可"
       security:
         - tokenAuth: []
+
+  /nowpos/data:
     post:
       tags:
         - "nowpos-api"
       summary: "データを更新・挿入する。"
       description: "データを更新・挿入する。"
-      consumes:
+      produces:
         - "application/json"
       parameters:
         - in: "body"
@@ -151,7 +174,7 @@ paths:
         - "nowpos-api"
       summary: "データを更新する。"
       description: "データを更新する。"
-      consumes:
+      produces:
         - "application/json"
       parameters:
         - in: "body"
@@ -214,6 +237,47 @@ definitions:
       status:
         type: "string"
         example: "DECLINED"
+  NowPosGetResponse2:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        example: "151"
+      事業所CD:
+        type: "string"
+        example: "0101"
+      運転手:
+        type: "string"
+        example: "宮崎"
+      日付:
+        type: "string"
+        example: "2022/08/04"
+      時間:
+        type: "string"
+        example: "09:52:56"
+      location:
+        type: "object"
+        properties:
+          Posx:
+            type: "string"
+            example: "36.432614"
+          Posy:
+            type: "string"
+            example: "139.062936"
+      carstatus:
+        type: "array"
+        items:
+          type: "object"
+          properties:
+            rest:
+              type: "string"
+              example: "f"
+            battery:
+              type: "string"
+              example: "79"
+            status:
+              type: "string"
+              example: "DECLINED"
 
   NowPosParameter:
     type: "object"
