@@ -25,6 +25,50 @@ tags:
 schemes:
   - "http"
 paths:
+  /bindatad/data:
+    get:
+      tags:
+        - "bindata-api"
+      summary: "指定データを取得する。"
+      description: "指定データを取得する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "日付"
+          description: "日付"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "事業所CD"
+          description: "事業所CD"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "利用者番号"
+          description: "利用者番号"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "送迎区分"
+          description: "送迎区分"
+          type: "string"
+          required: false
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            type: "array"
+            items:
+              $ref : "#/definitions/BindatadResponse"
+        "204":
+          description: "データなし"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+
+
   /nowpos/data/{id}:
     get:
       tags:
@@ -278,7 +322,6 @@ definitions:
             status:
               type: "string"
               example: "DECLINED"
-
   NowPosParameter:
     type: "object"
     properties:
@@ -318,7 +361,39 @@ definitions:
       事業所CD: 
         type: "string"
         example: "0001"
-
+  BindatadResponse:
+    type: "object"
+    properties:
+      日付:
+        type: "string"
+        example: "2022-08-11"
+      事業所CD:
+        type: "string"
+        example: "0101"
+      利用者番号:
+        type: "string"
+        example: "F8167"
+      送迎区分:
+        type: "string"
+        example: "2"
+      乗車時刻:
+        type: "string"
+        example: "12:01:01"
+      降車時刻:
+        type: "string"
+        example: "12:20:59"
+      carStatus:
+        type: "string"
+        example: null
+      updatetimec:
+        type: "string"
+        example: null
+      userStatus:
+        type: "string"
+        example: null
+      updatetimeu:
+        type: "string"
+        example: null
 
 externalDocs:
   description: "Find out more about Swagger"
