@@ -60,14 +60,40 @@ paths:
           schema:
             type: "array"
             items:
-              $ref : "#/definitions/BindatadResponse"
+              $ref : "#/definitions/BindatadRequestResponse"
         "204":
           description: "データなし"
         "401":
           description: "認証不可"
       security:
         - tokenAuth: []
-
+    post:
+      tags:
+        - "bindata-api"
+      summary: "指定データを設定する。"
+      description: "指定データを設定する。"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
+          required: true
+          schema:
+            $ref : "#/definitions/BindatadRequestResponse"
+      responses:
+        "201":
+          description: "データ"
+          schema:
+            type: "array"
+            items:
+              $ref : "#/definitions/BindatadRequestResponse"
+        "204":
+          description: "データなし"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
 
   /nowpos/data/{id}:
     get:
@@ -360,8 +386,8 @@ definitions:
         example: "05:00:00"
       事業所CD: 
         type: "string"
-        example: "0001"
-  BindatadResponse:
+        example: "0001" 
+  BindatadRequestResponse:
     type: "object"
     properties:
       日付:
