@@ -94,6 +94,70 @@ paths:
           description: "認証不可"
       security:
         - tokenAuth: []
+    put:
+      tags:
+        - "bindata-api"
+      summary: "指定データを変更する。"
+      description: "指定データを変更する。"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
+          required: true
+          schema:
+            $ref : "#/definitions/BindatadRequestResponse"
+      responses:
+        "201":
+          description: "データ"
+          schema:
+            type: "array"
+            items:
+              $ref : "#/definitions/BindatadRequestResponse"
+        "204":
+          description: "データなし"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+    delete:
+      tags:
+        - "bindata-api"
+      summary: "指定データを削除する。"
+      description: "指定データを削除する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "日付"
+          description: "日付"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "事業所CD"
+          description: "事業所CD"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "利用者番号"
+          description: "利用者番号"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "送迎区分"
+          description: "送迎区分"
+          type: "string"
+          required: true
+      responses:
+        "201":
+          description: "削除成功"
+        "204":
+          description: "データなし"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
 
   /nowpos/data/{id}:
     get:
