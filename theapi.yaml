@@ -25,7 +25,7 @@ tags:
 schemes:
   - "http"
 paths:
-  /bindatad/data:
+  /bindatad/data?日付={日付}&事業所CD={事業所CD}&利用者番号={利用者番号}&送迎区分={送迎区分}:
     get:
       tags:
         - "bindata-api"
@@ -67,6 +67,44 @@ paths:
           description: "認証不可"
       security:
         - tokenAuth: []
+    delete:
+      tags:
+        - "bindata-api"
+      summary: "指定データを削除する。"
+      description: "指定データを削除する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "日付"
+          description: "日付"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "事業所CD"
+          description: "事業所CD"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "利用者番号"
+          description: "利用者番号"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "送迎区分"
+          description: "送迎区分"
+          type: "string"
+          required: true
+      responses:
+        "201":
+          description: "削除成功"
+        "204":
+          description: "データなし"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+  /bindatad/data:
     post:
       tags:
         - "bindata-api"
@@ -115,43 +153,6 @@ paths:
             type: "array"
             items:
               $ref : "#/definitions/BindatadRequestResponse"
-        "204":
-          description: "データなし"
-        "401":
-          description: "認証不可"
-      security:
-        - tokenAuth: []
-    delete:
-      tags:
-        - "bindata-api"
-      summary: "指定データを削除する。"
-      description: "指定データを削除する。"
-      produces:
-        - "*/*"
-      parameters:
-        - in: "path"
-          name: "日付"
-          description: "日付"
-          type: "string"
-          required: true
-        - in: "path"
-          name: "事業所CD"
-          description: "事業所CD"
-          type: "string"
-          required: true
-        - in: "path"
-          name: "利用者番号"
-          description: "利用者番号"
-          type: "string"
-          required: true
-        - in: "path"
-          name: "送迎区分"
-          description: "送迎区分"
-          type: "string"
-          required: true
-      responses:
-        "201":
-          description: "削除成功"
         "204":
           description: "データなし"
         "401":
