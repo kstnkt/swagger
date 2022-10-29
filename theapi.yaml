@@ -330,6 +330,34 @@ paths:
       security:
         - tokenAuth: []
 
+  /jigyosyo?事業所CD=<{id}>:
+    get:
+      tags:
+        - "nowpos-api"
+      summary: "事業所の全データ、あるいは指定のデータを取得する。"
+      description: "事業所の全データ、あるいは指定のデータを取得する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "事業所CD"
+          type: "integer"
+          required: false
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/JigyosyoResponse"
+        "204":
+          description: "存在しない事業所CD、またはデータ無し"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+
 securityDefinitions:
   basicAuth:
     type: "basic"
@@ -339,6 +367,33 @@ securityDefinitions:
     in: "header"
 
 definitions:
+  JigyosyoResponse:
+    type: "object"
+    properties:
+      事業所CD:
+        type: "integer"
+        example: "9999"
+      事業所番号:
+        type: "string"
+        example: "A9999"
+      事業所名:
+        type: "string"
+        example: "体験"
+      フリガナ:
+        type: "string"
+        example: "タイケン"
+      memo:
+        type: "string"
+        example: null
+      lat:
+        type: "number"
+        example: 36.385245
+      lng:
+        type: "number"
+        example: 139.027786
+      service_range:
+        type: "integer"
+        example: 5
   NowPosGetResponse:
     type: "object"
     properties:
