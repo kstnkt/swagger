@@ -330,7 +330,7 @@ paths:
       security:
         - tokenAuth: []
 
-  /jigyosyo?事業所CD=<{id}>:
+  /nowpos/jigyosyo?事業所CD=<{id}>:
     get:
       tags:
         - "nowpos-api"
@@ -353,6 +353,52 @@ paths:
               $ref: "#/definitions/JigyosyoResponse"
         "204":
           description: "存在しない事業所CD、またはデータ無し"
+        "401":
+          description: "認証不可"
+      security:
+        - tokenAuth: []
+
+  /nowpos/binninzu_data?id=<{id}>&日付=<日付>&出発時間=<出発時間>:
+    get:
+      tags:
+        - "nowpos-api"
+      summary: "便の人数取得と降車されていない人数を取得する。"
+      description: "便の人数取得と降車されていない人数を取得する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "id"
+          description: "carId"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "日付"
+          description: "8 桁の日付 YYYYMMDD"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "出発時間"
+          description: "出発時間 HH:SS:00"
+          type: "string"
+          required: false
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            type: "object"
+            properties:
+              CNT:
+                type: "string"
+                example: "123"
+              CZ:
+                type: "string"
+                example: "123"
+              userStatus:
+                type: "string"
+                example: "休み"
+        "204":
+          description: "データ無し"
         "401":
           description: "認証不可"
       security:
