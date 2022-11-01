@@ -66,6 +66,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
     delete:
       tags:
@@ -103,6 +104,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
   /bindatad/data:
     post:
@@ -131,6 +133,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
     put:
       tags:
@@ -158,6 +161,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
   /nowpos/data/{id}:
@@ -182,6 +186,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
     delete:
       tags:
@@ -204,6 +209,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
   /nowpos/data/?id={id}&事業所CD={事業所CD}:
@@ -241,6 +247,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
   /nowpos/data:
@@ -304,6 +311,10 @@ paths:
           description: "認証不可"
         "404":
           description: "存在しない id"
+      security:
+        - basicAuth: []
+        - tokenAuth: []
+
     put:
       tags:
         - "nowpos-api"
@@ -328,6 +339,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
   /nowpos/jigyosyo?事業所CD={id}:
@@ -356,6 +368,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
   /nowpos/binninzu_data?id={id}&日付={日付}&出発時間={出発時間}:
@@ -402,6 +415,7 @@ paths:
         "401":
           description: "認証不可"
       security:
+        - basicAuth: []
         - tokenAuth: []
 
 securityDefinitions:
