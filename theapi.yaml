@@ -11,7 +11,7 @@ info:
     name: "一般社団法人ソーシャルアクション機構に帰属"
     url: "https://socialaction.net"
 
-host: "localhost:80"
+host: "localhost:5000"
 
 basePath: "/"
 
@@ -330,7 +330,7 @@ paths:
       security:
         - tokenAuth: []
 
-  /nowpos/jigyosyo?事業所CD=<{id}>:
+  /nowpos/jigyosyo?事業所CD={id}:
     get:
       tags:
         - "nowpos-api"
@@ -358,7 +358,7 @@ paths:
       security:
         - tokenAuth: []
 
-  /nowpos/binninzu_data?id=<{id}>&日付=<日付>&出発時間=<出発時間>:
+  /nowpos/binninzu_data?id={id}&日付={日付}&出発時間={出発時間}:
     get:
       tags:
         - "nowpos-api"
