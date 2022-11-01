@@ -342,7 +342,7 @@ paths:
         - in: "path"
           name: "id"
           description: "事業所CD"
-          type: "integer"
+          type: "string"
           required: false
       responses:
         "200":
