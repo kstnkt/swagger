@@ -11,7 +11,7 @@ info:
     name: "一般社団法人ソーシャルアクション機構に帰属"
     url: "https://socialaction.net"
 
-host: "localhost:5000"
+host: "52.199.67.211"
 
 basePath: "/"
 
