@@ -1,7 +1,7 @@
 swagger: "2.0"
 
 info:
-  description: "本ドキュメントでは一般社団法人ソーシャルアクション機構が運営するサービス「福祉Mover」の API サーバの API 仕様を記述する。"
+  description: "本ドキュメントでは、一般社団法人ソーシャルアクション機構が運営するサービス「福祉Mover」の API サーバの API 仕様を記述する。"
   version: "1.0.0"
   title: "ソーシャルアクション機構 福祉Mover API Documents"
   termsOfService: "https://socialaction.net/mover/user-3/"
