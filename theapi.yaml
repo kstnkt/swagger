@@ -17,11 +17,11 @@ basePath: "/"
 
 tags:
   - name: "bindata-api"
-    description: "bindata-api API"
+    description: "bindata-api"
   - name: "nowpos-api"
-    description: "nowpos-api API"
+    description: "nowpos-api"
   - name:  "possavs-api"
-    description: "possavs/data"
+    description: "possavs-api"
 schemes:
   - "http"
 paths:
@@ -418,6 +418,60 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
+  /possavs/data?日付={日付}&時間={時間}&id={id}&時間1={時間1}&時間2={時間2}&事業所CD={事業所CD}:
+    get:
+      tags:
+        - "possavs-api"
+      summary: "全データ、あるいは指定のデータを取得する。"
+      description: "全データ、あるいは指定のデータを取得する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "日付"
+          description: "日付"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "時間"
+          description: "時間"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "id"
+          description: "id"
+          type: "integer"
+          required: false
+        - in: "path"
+          name: "時間1"
+          description: "時間1"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "時間2"
+          description: "時間2"
+          type: "string"
+          required: false
+        - in: "path"
+          name: "事業所CD"
+          description: "事業所CD"
+          type: "string"
+          required: false
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            type: "array"
+            items:
+              $ref: "#/definitions/PossavsResponse"
+        "204":
+          description: "データ無し"
+        "401":
+          description: "認証不可"
+      security:
+        - basicAuth: []
+        - tokenAuth: []
+
 securityDefinitions:
   basicAuth:
     type: "basic"
@@ -427,6 +481,43 @@ securityDefinitions:
     in: "header"
 
 definitions:
+  PossavsResponse:
+    type: "object"
+    properties:
+      事業所CD:
+        type: "string"
+        example: "0008"
+      id:
+        type: "integer"
+        example: 93
+      日付:
+        type: "string"
+        example: "2022-03-09"
+      時間:
+        type: "string"
+        example: "15:14:49"
+      lng:
+        type: "number"
+        example: 139.00644,
+      lat:
+        type: "number"
+        example: 36.362538
+      出発時間:
+        type: "string"
+        example: "05:00:00"
+      battery:
+        type: "string"
+        example: ""
+      imei:
+        type: "string"
+        example: "869829033282718"
+      rest:
+        type: "string"
+        example: "f"
+      status:
+        type: "string"
+        example: "CANCEL"
+
   JigyosyoResponse:
     type: "object"
     properties:
@@ -454,6 +545,7 @@ definitions:
       service_range:
         type: "integer"
         example: 5
+
   NowPosGetResponse:
     type: "object"
     properties:
@@ -487,6 +579,7 @@ definitions:
       status:
         type: "string"
         example: "DECLINED"
+
   NowPosGetResponse2:
     type: "object"
     properties:
@@ -528,6 +621,7 @@ definitions:
             status:
               type: "string"
               example: "DECLINED"
+
   NowPosParameter:
     type: "object"
     properties:
@@ -566,7 +660,8 @@ definitions:
         example: "05:00:00"
       事業所CD: 
         type: "string"
-        example: "0001" 
+        example: "0001"
+
   BindatadRequestResponse:
     type: "object"
     properties:
