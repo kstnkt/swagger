@@ -472,6 +472,95 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
+  /possavs/data:
+    post:
+      tags:
+        - "possavs-api"
+      summary: "データを登録する。"
+      description: "データを登録する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
+          required: true
+          schema:
+            $ref: "#/definitions/PossavsResponse"
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            $ref: "#/definitions/PossavsResponse"
+        "204":
+          description: "パラメータに主キーが正常に指定されていない。"
+        "401":
+          description: "認証不可"
+      security:
+        - basicAuth: []
+        - tokenAuth: []
+    put:
+      tags:
+        - "possavs-api"
+      summary: "データを更新する。"
+      description: "データを更新する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "body"
+          name: ""
+          description: "JSON 形式の body"
+          required: true
+          schema:
+            $ref: "#/definitions/PossavsResponse"
+      responses:
+        "200":
+          description: "データ"
+          schema:
+            $ref: "#/definitions/PossavsResponse"
+        "204":
+          description: "パラメータに主キーが正常に指定されていない。"
+        "401":
+          description: "認証不可"
+      security:
+        - basicAuth: []
+        - tokenAuth: []
+
+  /possavs/data?日付={日付}&時間={時間}&id={id}:
+    delete:
+      tags:
+        - "possavs-api"
+      summary: "指定のデータを削除する。"
+      description: "指定のデータを削除する。"
+      produces:
+        - "*/*"
+      parameters:
+        - in: "path"
+          name: "日付"
+          description: "日付"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "時間"
+          description: "時間"
+          type: "string"
+          required: true
+        - in: "path"
+          name: "id"
+          description: "id"
+          type: "integer"
+          required: true
+      responses:
+        "201":
+          description: "削除成功"
+        "204":
+          description: "データ無し"
+        "401":
+          description: "認証不可"
+      security:
+        - basicAuth: []
+        - tokenAuth: []
+
 securityDefinitions:
   basicAuth:
     type: "basic"
