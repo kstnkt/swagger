@@ -23,7 +23,7 @@ tags:
   - name:  "possavs-api"
     description: "possavs-api"
 schemes:
-  - "http"
+  - "https"
 paths:
   /bindatad/data?日付={日付}&事業所CD={事業所CD}&利用者番号={利用者番号}&送迎区分={送迎区分}:
     get:
