@@ -25,7 +25,7 @@ tags:
 schemes:
   - "https"
 paths:
-  /bindatad/data?日付={日付}&事業所CD={事業所CD}&利用者番号={利用者番号}&送迎区分={送迎区分}:
+  /api/bindatad/data?日付={日付}&事業所CD={事業所CD}&利用者番号={利用者番号}&送迎区分={送迎区分}:
     get:
       tags:
         - "bindata-api"
@@ -106,7 +106,7 @@ paths:
       security:
         - basicAuth: []
         - tokenAuth: []
-  /bindatad/data:
+  /api/bindatad/data:
     post:
       tags:
         - "bindata-api"
@@ -164,7 +164,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /nowpos/data/{id}:
+  /api/nowpos/data/{id}:
     get:
       tags:
         - "nowpos-api"
@@ -212,7 +212,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /nowpos/data/?id={id}&事業所CD={事業所CD}:
+  /api/nowpos/data/?id={id}&事業所CD={事業所CD}:
     get:
       tags:
         - "nowpos-api"
@@ -250,7 +250,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /nowpos/data:
+  /api/nowpos/data:
     post:
       tags:
         - "nowpos-api"
@@ -342,7 +342,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /nowpos/jigyosyo?事業所CD={id}:
+  /api/nowpos/jigyosyo?事業所CD={id}:
     get:
       tags:
         - "nowpos-api"
@@ -371,7 +371,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /nowpos/binninzu_data?id={id}&日付={日付}&出発時間={出発時間}:
+  /api/nowpos/binninzu_data?id={id}&日付={日付}&出発時間={出発時間}:
     get:
       tags:
         - "nowpos-api"
@@ -418,7 +418,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /possavs/data?日付={日付}&時間={時間}&id={id}&時間1={時間1}&時間2={時間2}&事業所CD={事業所CD}:
+  /api/possavs/data?日付={日付}&時間={時間}&id={id}&時間1={時間1}&時間2={時間2}&事業所CD={事業所CD}:
     get:
       tags:
         - "possavs-api"
@@ -472,7 +472,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /possavs/data:
+  /api/possavs/data:
     post:
       tags:
         - "possavs-api"
@@ -526,7 +526,7 @@ paths:
         - basicAuth: []
         - tokenAuth: []
 
-  /possavs/data?日付={日付}&時間={時間}&id={id}:
+  /api/possavs/data?日付={日付}&時間={時間}&id={id}:
     delete:
       tags:
         - "possavs-api"
